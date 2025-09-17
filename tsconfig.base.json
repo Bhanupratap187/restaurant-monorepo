@@ -16,6 +16,14 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@restaurant-monorepo/source"]
+    "customConditions": ["@restaurant-monorepo/source"],
+    "baseUrl": ".",
+    "paths": {
+      "@restaurant-monorepo/shared-types": ["shared-types/src/index.ts"],
+      "@restaurant-monorepo/shared-ui": ["shared-ui/src/index.ts"],
+      "@restaurant-monorepo/api-client": ["api-client/src/index.ts"],
+      "@restaurant-monorepo/rbac": ["rbac/src/index.ts"],
+      "@restaurant-monorepo/database": ["database/src/index.ts"]
+    }
   }
 }
