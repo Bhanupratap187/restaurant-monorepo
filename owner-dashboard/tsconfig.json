@@ -3,6 +3,18 @@
   "include": [],
   "references": [
     {
+      "path": "../shared-ui"
+    },
+    {
+      "path": "../shared-types"
+    },
+    {
+      "path": "../rbac"
+    },
+    {
+      "path": "../api-client"
+    },
+    {
       "path": "./tsconfig.app.json"
     },
     {

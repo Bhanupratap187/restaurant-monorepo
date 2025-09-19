@@ -1,5 +1,13 @@
 {
   "name": "@restaurant-monorepo/staff-dashboard",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@restaurant-monorepo/api-client": "*",
+    "@restaurant-monorepo/shared-types": "*",
+    "@restaurant-monorepo/shared-ui": "*",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-router-dom": "6.29.0"
+  }
 }
