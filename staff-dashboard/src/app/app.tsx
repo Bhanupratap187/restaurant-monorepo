@@ -6,7 +6,9 @@ import { KitchenDashboard } from '../pages/KitchenDashboard';
 import { LoadingSpinner, Button } from '@restaurant-monorepo/shared-ui';
 
 // Protected Route Component for Staff
-const StaffProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const StaffProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const { isAuthenticated, loading, user, logout } = useAuth();
 
   if (loading) {
@@ -30,27 +32,39 @@ const StaffProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children
           <div className="flex items-center space-x-4">
             <div className="text-2xl">🍽️</div>
             <div>
-              <h1 className="text-lg font-semibold text-gray-900">Staff Dashboard</h1>
+              <h1 className="text-lg font-semibold text-gray-900">
+                Staff Dashboard
+              </h1>
               <p className="text-sm text-gray-500">
                 {user?.name} • {user?.role === 'chef' ? '👨‍🍳 Chef' : '🧑‍💼 Waiter'}
               </p>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             {/* Current time */}
             <div className="text-sm text-gray-600">
               {new Date().toLocaleTimeString()}
             </div>
-            
+
             {/* Logout button */}
             <Button
               variant="ghost"
               size="sm"
-              onClick={logout}
+              onClick={async () => await logout()}
               icon={
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  />
                 </svg>
               }
             >
@@ -61,9 +75,7 @@ const StaffProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children
       </div>
 
       {/* Main content */}
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
     </div>
   );
 };
@@ -92,54 +104,57 @@ function AppContent() {
   return (
     <Routes>
       {/* Public Routes */}
-      <Route 
-        path="/login" 
+      <Route
+        path="/login"
         element={
           <PublicRoute>
             <StaffLogin />
           </PublicRoute>
-        } 
+        }
       />
 
       {/* Staff Dashboard Routes */}
-      <Route 
-        path="/kitchen" 
+      <Route
+        path="/kitchen"
         element={
           <StaffProtectedRoute>
             <KitchenDashboard />
           </StaffProtectedRoute>
-        } 
+        }
       />
 
       {/* Alternative route names */}
-      <Route 
-        path="/orders" 
+      <Route
+        path="/orders"
         element={
           <StaffProtectedRoute>
             <KitchenDashboard />
           </StaffProtectedRoute>
-        } 
+        }
       />
 
       {/* Redirect root to kitchen */}
       <Route path="/" element={<Navigate to="/kitchen" replace />} />
-      
+
       {/* 404 Not Found */}
-      <Route path="*" element={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-          <div className="text-center">
-            <div className="text-6xl mb-4">👨‍🍳</div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
-            <p className="text-gray-600 mb-6">Page not found</p>
-            <a 
-              href="/kitchen" 
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700"
-            >
-              Back to Kitchen
-            </a>
+      <Route
+        path="*"
+        element={
+          <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            <div className="text-center">
+              <div className="text-6xl mb-4">👨‍🍳</div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
+              <p className="text-gray-600 mb-6">Page not found</p>
+              <a
+                href="/kitchen"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700"
+              >
+                Back to Kitchen
+              </a>
+            </div>
           </div>
-        </div>
-      } />
+        }
+      />
     </Routes>
   );
 }

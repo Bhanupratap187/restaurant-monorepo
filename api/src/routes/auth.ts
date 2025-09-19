@@ -39,6 +39,6 @@ router.post('/login', validate(loginSchema), login);
 // Protected routes
 router.get('/profile', authenticate, getProfile);
 router.post('/refresh', authenticate, refreshToken);
-router.post('/logout', authenticate, logout);
+router.post('/logout', logout); // No auth required for logout
 
 export default router;

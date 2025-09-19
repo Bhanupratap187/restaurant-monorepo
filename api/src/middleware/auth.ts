@@ -65,7 +65,7 @@ export function authorize(requiredPermissions: Permission[]) {
       throw ApiError.unauthorized('Authentication required');
     }
 
-    const userPermissions = ROLE_PERMISSIONS[req.user.role];
+    const userPermissions = ROLE_PERMISSIONS[req.user?.role];
     const hasAllPermissions = requiredPermissions.every((permission) =>
       userPermissions.includes(permission)
     );

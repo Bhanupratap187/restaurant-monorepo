@@ -100,16 +100,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      // Call logout endpoint FIRST while token exists
+      await apiClient.logout();
+    } catch (error) {
+      // Ignore logout endpoint errors
+      console.warn('Logout endpoint failed:', error);
+    }
+    
+    // Then clear local storage and state
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     setToken(null);
     setUser(null);
-
-    // Try to call logout endpoint (optional)
-    apiClient.logout().catch(() => {
-      // Ignore logout endpoint errors
-    });
+    
+    // Clear API client auth token
+    apiClient.setAuthToken('');
   };
 
   const checkAuth = async () => {

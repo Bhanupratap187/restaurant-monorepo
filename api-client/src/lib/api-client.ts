@@ -161,8 +161,13 @@ export class RestaurantApiClient {
    * Logout user
    */
   async logout(): Promise<ApiResponse<null>> {
-    const response = await this.api.post('/auth/logout');
-    return response.data;
+    try {
+      const response = await this.api.post('/auth/logout');
+      return response.data;
+    } finally {
+      // Always clear auth data after logout attempt
+      this.clearAuth();
+    }
   }
 
   // =============================================================================
@@ -366,7 +371,11 @@ export class RestaurantApiClient {
    * Set authentication token
    */
   setAuthToken(token: string): void {
-    localStorage.setItem('auth_token', token);
+    if (token && token.trim()) {
+      localStorage.setItem('auth_token', token);
+    } else {
+      localStorage.removeItem('auth_token');
+    }
   }
 
   /**

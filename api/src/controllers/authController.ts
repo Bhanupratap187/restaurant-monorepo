@@ -151,11 +151,12 @@ export const refreshToken = asyncHandler(
  */
 export const logout = asyncHandler(
   async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-    if (!req.user) {
-      throw ApiError.unauthorized('User not authenticated');
+    // Log if user is authenticated, but don't require it
+    if (req.user) {
+      logger.info('User logged out', { userId: req.user._id });
+    } else {
+      logger.info('Anonymous logout attempt');
     }
-
-    logger.info('User logged out', { userId: req.user._id });
 
     res.json({
       success: true,
