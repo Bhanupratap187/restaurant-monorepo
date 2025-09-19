@@ -16,6 +16,8 @@
     }
   },
   "dependencies": {
+    "@restaurant-monorepo/shared-types": "*",
+    "mongoose": "^8.18.1",
     "tslib": "^2.3.0"
   }
 }

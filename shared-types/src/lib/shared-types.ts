@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export type OrderStatus =
   | 'pending'
   | 'preparing'
@@ -6,8 +8,8 @@ export type OrderStatus =
   | 'cancelled';
 
 export interface OrderItem {
-  id: string;
-  menuItemId: string;
+  id?: string;
+  menuItemId: mongoose.Schema.Types.ObjectId;
   menuItemName: string;
   quantity: number;
   unitPrice: number;
@@ -17,10 +19,12 @@ export interface OrderItem {
 
 export interface Order {
   id: string;
+  orderNumber: string;
   tableNumber: number;
   items: OrderItem[];
   status: OrderStatus;
   total: number;
+  createdBy: mongoose.Schema.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
   customerName?: string;
@@ -62,9 +66,12 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  password: string;
   role: UserRole;
   permissions: Permission[];
   createdAt: Date;
+  isActive: boolean;
+  lastLogin: Date;
 }
 
 // API Request/Response Types

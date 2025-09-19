@@ -19,11 +19,11 @@
     "customConditions": ["@restaurant-monorepo/source"],
     "baseUrl": ".",
     "paths": {
-      "@restaurant-monorepo/shared-types": ["shared-types/src/index.ts"],
-      "@restaurant-monorepo/shared-ui": ["shared-ui/src/index.ts"],
-      "@restaurant-monorepo/api-client": ["api-client/src/index.ts"],
-      "@restaurant-monorepo/rbac": ["rbac/src/index.ts"],
-      "@restaurant-monorepo/database": ["database/src/index.ts"]
+      "@restaurant-monorepo/api-client": ["api-client/dist/index.d.ts"],
+      "@restaurant-monorepo/database": ["database/dist/index.d.ts"],
+      "@restaurant-monorepo/rbac": ["rbac/dist/index.d.ts"],
+      "@restaurant-monorepo/shared-types": ["shared-types/dist/index.d.ts"],
+      "@restaurant-monorepo/shared-ui": ["shared-ui/dist/index.d.ts"]
     }
   }
 }
